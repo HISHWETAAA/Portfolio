@@ -13,8 +13,8 @@ const Contact = () => {
   };
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
-  const [buttonText, setButtonText] = useState('Send');
-  const [status, setStatus] = useState({});
+  const [buttonText] = useState('Send');
+  
   const formRef = useRef();
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -42,26 +42,7 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setButtonText('Sending...');
-    
-    
-      const response = await fetch('https://localhost:5000/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(formDetails),
-      });
-
-      const result = await response.json();
-
-      setButtonText('Send');
-      setFormDetails(formInitialDetails);
-
-      
-  };
+  
 
   return (
     <section className='contact' id='connect'>
@@ -126,11 +107,7 @@ const Contact = () => {
                   {error  && "Error"}
                   {success && "Success"}
                 </Col>
-                {status.message &&
-                  <Col>
-                    <p className={status.success === false ? "danger" : "success"}>{status.message}</p>
-                  </Col>
-                }
+                
               </Row>
             </form>
           </Col>
